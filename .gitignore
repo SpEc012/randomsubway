@@ -1,0 +1,9 @@
+node_modules
+dist
+*.log
+.DS_Store
+# Local-only real photo assets (never commit third-party images)
+assets/custom/*
+!assets/custom/.gitkeep
+assets/manifest.local.json
+src/data/photo-manifest.local.json
