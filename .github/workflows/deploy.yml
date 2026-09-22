@@ -1,7 +1,9 @@
 name: Deploy to GitHub Pages
+# Builds with Vite and publishes dist/. (A raw "static" upload of the repo does NOT work:
+# index.html points at TypeScript source that only runs after `npm run build`.)
 on:
   push:
-    branches: [main]
+    branches: [main, claude/subway-sandwich-randomizer-ouotlj]
   workflow_dispatch:
 permissions:
   contents: read
@@ -9,7 +11,7 @@ permissions:
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,6 +21,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: actions/configure-pages@v5
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3

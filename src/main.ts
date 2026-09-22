@@ -586,3 +586,5 @@ if (shared && decodeShare(shared)) {
     /* ignore */
   }
 }
+
+(window as unknown as { __sandwichBooted?: boolean }).__sandwichBooted = true;
