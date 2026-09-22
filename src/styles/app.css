@@ -899,11 +899,26 @@ input[type="range"]:disabled {
 .receipt.is-pending .say-text {
   color: var(--ink-mute);
 }
+.receipt {
+  container-type: inline-size;
+}
 .rc-actions {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 8px;
   margin-top: 12px;
+}
+.rc-actions .btn {
+  white-space: nowrap;
+}
+/* Narrow receipt card: primary action gets its own row instead of wrapping its label. */
+@container (max-width: 360px) {
+  .rc-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+  .rc-actions .btn--primary {
+    grid-column: 1 / -1;
+  }
 }
 .btn {
   display: inline-flex;
@@ -1273,6 +1288,10 @@ input[type="range"]:disabled {
   .layout {
     grid-template-columns: minmax(300px, 350px) minmax(0, 1fr);
     grid-template-areas: "machine stage" "side side";
+  }
+  /* The side cards now sit below the machine's column — a sticky machine would slide over them. */
+  .machine {
+    position: static;
   }
   .side {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
