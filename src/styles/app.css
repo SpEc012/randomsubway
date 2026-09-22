@@ -283,24 +283,25 @@
   display: flex;
   align-items: center;
   flex: none;
-  width: 50px;
+  width: 56px;
 }
 .tile-ico {
   display: block;
-  width: 48px;
+  width: 50px;
   flex: none;
   color: var(--ink-mute);
 }
-.tile-icons[data-count="2"] .tile-ico,
-.tile-icons[data-count="3"] .tile-ico,
-.tile-icons[data-count="4"] .tile-ico {
-  width: 40px;
-  margin-right: -26px;
+.tile-icons[data-count="2"] .tile-ico {
+  width: 36px;
+  margin-right: -20px;
 }
 .tile-icons[data-count="3"] .tile-ico,
 .tile-icons[data-count="4"] .tile-ico {
-  width: 36px;
+  width: 32px;
   margin-right: -24px;
+}
+.tile-icons .tile-ico:last-child {
+  margin-right: 0;
 }
 .tile-ico--none {
   height: 24px;
@@ -389,7 +390,7 @@
   font-variant-numeric: tabular-nums;
 }
 .dial-name {
-  color: var(--chaos-color);
+  color: var(--chaos-ink);
   font-weight: 750;
   transition: color var(--dur);
 }
@@ -403,7 +404,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 28px;
+  height: 36px;
   background: transparent;
   margin: 0;
 }
@@ -750,6 +751,9 @@ input[type="range"]:disabled {
   overflow: hidden;
   width: 1ch;
   line-height: 1em;
+  position: relative;
+  contain: paint;
+  clip-path: inset(0);
 }
 .odo-col {
   display: block;
@@ -1323,18 +1327,16 @@ input[type="range"]:disabled {
   }
   .stage-head {
     padding: 16px 16px 4px;
-    flex-direction: column;
+    gap: 8px;
   }
   .gauge {
-    align-self: flex-end;
-    margin-top: -58px;
-    width: 108px;
+    width: 92px;
   }
   .gauge svg {
-    width: 108px;
+    width: 92px;
   }
-  .stage-heading {
-    padding-right: 110px;
+  .gauge-num {
+    font-size: 20px;
   }
   .stage-canvas {
     margin: 8px 8px 0;

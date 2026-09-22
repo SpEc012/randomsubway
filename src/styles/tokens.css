@@ -20,7 +20,8 @@
   --ink-mute: #5f7166;
   --line: rgba(14, 27, 18, 0.1);
   --line-strong: rgba(14, 27, 18, 0.18);
-  --accent: var(--green-600);
+  /* Brand green #008C15 is 4.4:1 on white — just under AA — so text & fills use a deeper green. */
+  --accent: #007a12;
   --accent-ink: #ffffff;
   --link: var(--green-700);
   --focus: #0b6bcb;
@@ -42,6 +43,7 @@
   /* Chaos dial (0–1) → hue sweeps green → amber → red. Set from JS. */
   --chaos: 0.25;
   --chaos-color: hsl(calc(130 - var(--chaos) * 125) 80% 38%);
+  --chaos-ink: hsl(calc(130 - var(--chaos) * 125) 90% 27%);
 
   --shadow-card: 0 1px 2px rgba(14, 27, 18, 0.06), 0 10px 30px -12px rgba(14, 27, 18, 0.18);
   --shadow-pop: 0 2px 4px rgba(14, 27, 18, 0.08), 0 18px 40px -14px rgba(14, 27, 18, 0.3);
@@ -89,6 +91,7 @@
     --tone-cursed: #ff8a4c;
     --tone-crime: #ff6a5e;
     --chaos-color: hsl(calc(130 - var(--chaos) * 125) 70% 52%);
+    --chaos-ink: hsl(calc(130 - var(--chaos) * 125) 80% 62%);
     --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
     --shadow-pop: 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
     --shadow-inset: inset 0 1px 4px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
@@ -120,6 +123,7 @@
   --tone-cursed: #ff8a4c;
   --tone-crime: #ff6a5e;
   --chaos-color: hsl(calc(130 - var(--chaos) * 125) 70% 52%);
+  --chaos-ink: hsl(calc(130 - var(--chaos) * 125) 80% 62%);
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
   --shadow-pop: 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
   --shadow-inset: inset 0 1px 4px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.04);

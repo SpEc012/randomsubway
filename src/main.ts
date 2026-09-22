@@ -75,7 +75,7 @@ const TOTAL = countForFilters([]);
 const app = document.getElementById('app')!;
 app.innerHTML = `
   <header class="top">
-    <a class="brand" href="./" aria-label="Sandwich Roulette home">
+    <a class="brand" href="./">
       <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
         <circle cx="24" cy="24" r="22" fill="var(--green-600)"/>
         <circle cx="24" cy="24" r="16" fill="none" stroke="var(--yellow)" stroke-width="3" stroke-dasharray="4.2 4.2"/>

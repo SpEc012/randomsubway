@@ -17,9 +17,12 @@ export class Odometer {
   set(text: string, animate = true): void {
     const prev = this.value;
     this.value = text;
-    this.el.setAttribute('aria-label', text);
     const quick = !animate || reducedMotion();
     const frag = document.createDocumentFragment();
+    const sr = document.createElement('span');
+    sr.className = 'sr-only';
+    sr.textContent = text;
+    frag.append(sr);
     const chars = [...text];
     const digitsTotal = chars.filter((c) => /\d/.test(c)).length;
     let digitIndex = 0;
