@@ -12,7 +12,9 @@
     "lint": "biome check src scripts",
     "format": "biome check --write src scripts",
     "test": "vitest run",
-    "assets:ingest": "node scripts/ingest-assets.mjs"
+    "assets:ingest": "node scripts/ingest-assets.mjs",
+    "e2e": "node scripts/e2e.mjs",
+    "smoke": "node scripts/smoke.mjs"
   },
   "license": "MIT",
   "devDependencies": {

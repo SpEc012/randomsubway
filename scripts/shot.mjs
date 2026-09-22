@@ -7,7 +7,8 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({
   viewport: { width: Number(w), height: Number(h) },
-  deviceScaleFactor: 1,
+  deviceScaleFactor: Number(process.env.DPR ?? 1),
+  colorScheme: process.env.SCHEME === 'dark' ? 'dark' : 'light',
 });
 const errors = [];
 page.on('pageerror', (e) => errors.push(String(e)));

@@ -57,11 +57,17 @@ const TONE_COLOR: Record<string, string> = {
   crime: '#C2251B',
 };
 
-/** Render a 1200×630 share card (2× for crispness) and return it as a PNG blob. */
-export async function shareCard(o: Order, seed: string, h: Harmony, rankText: string): Promise<Blob> {
+/** Render a 1200×630 share card (2× by default for crispness) and return it as a PNG blob. */
+export async function shareCard(
+  o: Order,
+  seed: string,
+  h: Harmony,
+  rankText: string,
+  scale = 2,
+): Promise<Blob> {
   const W = 1200;
   const H = 630;
-  const S = 2;
+  const S = scale;
   const art = buildSandwich(o, { seed, finished: true, prefix: `share${Date.now()}` });
   const vb = art.viewBox;
   const artW = 1080;
@@ -96,10 +102,18 @@ export async function shareCard(o: Order, seed: string, h: Harmony, rankText: st
   const drawW = (artW * drawH) / artH;
   g.drawImage(img, (W - drawW) / 2, 112 + (maxH - drawH), drawW, drawH);
 
+  // Title: shrink to fit before resorting to an ellipsis.
   g.fillStyle = '#0E1B12';
-  g.font = `800 42px ${display}`;
-  const title = orderTitle(o);
-  g.fillText(title.length > 42 ? `${title.slice(0, 41)}…` : title, 60, 540);
+  let title = orderTitle(o);
+  let size = 44;
+  const maxW = W - 120;
+  g.font = `800 ${size}px ${display}`;
+  while (g.measureText(title).width > maxW && size > 28) {
+    size -= 2;
+    g.font = `800 ${size}px ${display}`;
+  }
+  while (g.measureText(title).width > maxW && title.length > 4) title = `${title.slice(0, -2).trimEnd()}…`;
+  g.fillText(title, 60, 540);
 
   const pill = `${h.score}/100 · ${h.verdict.label}`;
   g.font = `700 20px "Inter Variable", system-ui, sans-serif`;
