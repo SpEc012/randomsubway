@@ -1,0 +1,126 @@
+/* Design tokens — every color, radius, shadow and duration lives here. */
+:root {
+  color-scheme: light;
+  --green-800: #004d17;
+  --green-700: #00612a;
+  --green-600: #008c15;
+  --green-500: #009639;
+  --green-100: #e4f3e7;
+  --green-50: #f1f8f2;
+  --yellow: #ffc600;
+  --yellow-dim: #e0ae00;
+  --yellow-ink: #3d2f00;
+
+  --bg: #f3f6f3;
+  --surface: #ffffff;
+  --surface-2: #f5f8f5;
+  --surface-3: #ebf0ec;
+  --ink: #0e1b12;
+  --ink-soft: #3a4f42;
+  --ink-mute: #5f7166;
+  --line: rgba(14, 27, 18, 0.1);
+  --line-strong: rgba(14, 27, 18, 0.18);
+  --accent: var(--green-600);
+  --accent-ink: #ffffff;
+  --link: var(--green-700);
+  --focus: #0b6bcb;
+
+  --studio-hi: #ffffff;
+  --studio-lo: #e9eeea;
+  --studio-floor: #dfe6e0;
+  --paper: #fffdf6;
+  --paper-ink: #1f1a12;
+  --paper-mute: #6d6556;
+
+  --tone-kiss: #007a12;
+  --tone-good: #23813a;
+  --tone-ok: #5f6f1b;
+  --tone-meh: #9a5c00;
+  --tone-cursed: #b4450f;
+  --tone-crime: #b21e16;
+
+  /* Chaos dial (0–1) → hue sweeps green → amber → red. Set from JS. */
+  --chaos: 0.25;
+  --chaos-color: hsl(calc(130 - var(--chaos) * 125) 80% 38%);
+
+  --shadow-card: 0 1px 2px rgba(14, 27, 18, 0.06), 0 10px 30px -12px rgba(14, 27, 18, 0.18);
+  --shadow-pop: 0 2px 4px rgba(14, 27, 18, 0.08), 0 18px 40px -14px rgba(14, 27, 18, 0.3);
+  --shadow-inset: inset 0 1px 3px rgba(14, 27, 18, 0.12), inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+
+  --radius: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --reel-h: 58px;
+
+  --dur-fast: 140ms;
+  --dur: 260ms;
+  --dur-slow: 620ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --font-ui: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0a110c;
+    --surface: #111a14;
+    --surface-2: #16211a;
+    --surface-3: #1d2a21;
+    --ink: #e8f1ea;
+    --ink-soft: #b5c7bb;
+    --ink-mute: #8a9d91;
+    --line: rgba(232, 241, 234, 0.1);
+    --line-strong: rgba(232, 241, 234, 0.18);
+    --accent: #1fae3c;
+    --accent-ink: #04140a;
+    --link: #5fd47a;
+    --focus: #7cb8ff;
+    --studio-hi: #2a372e;
+    --studio-lo: #151e18;
+    --studio-floor: #0f1611;
+    --tone-kiss: #3fcf5c;
+    --tone-good: #6ccf7f;
+    --tone-ok: #b9c95a;
+    --tone-meh: #f0ae3c;
+    --tone-cursed: #ff8a4c;
+    --tone-crime: #ff6a5e;
+    --chaos-color: hsl(calc(130 - var(--chaos) * 125) 70% 52%);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+    --shadow-pop: 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+    --shadow-inset: inset 0 1px 4px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0a110c;
+  --surface: #111a14;
+  --surface-2: #16211a;
+  --surface-3: #1d2a21;
+  --ink: #e8f1ea;
+  --ink-soft: #b5c7bb;
+  --ink-mute: #8a9d91;
+  --line: rgba(232, 241, 234, 0.1);
+  --line-strong: rgba(232, 241, 234, 0.18);
+  --accent: #1fae3c;
+  --accent-ink: #04140a;
+  --link: #5fd47a;
+  --focus: #7cb8ff;
+  --studio-hi: #2a372e;
+  --studio-lo: #151e18;
+  --studio-floor: #0f1611;
+  --tone-kiss: #3fcf5c;
+  --tone-good: #6ccf7f;
+  --tone-ok: #b9c95a;
+  --tone-meh: #f0ae3c;
+  --tone-cursed: #ff8a4c;
+  --tone-crime: #ff6a5e;
+  --chaos-color: hsl(calc(130 - var(--chaos) * 125) 70% 52%);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+  --shadow-inset: inset 0 1px 4px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+}

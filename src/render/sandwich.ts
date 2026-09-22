@@ -249,13 +249,14 @@ export function buildSandwich(order: Order, opts: BuildOpts): SandwichArt {
     };
   }
 
-  veggieOrder(order.veggies).forEach((id, i) =>
-    stack('veggies', renderLayer(ctxFor(`veg:${id}`, i), ing(id)), 0.8),
-  );
-  order.sauces.forEach((id, i) => stack('sauces', renderLayer(ctxFor(`sauce:${id}`, i), ing(id)), 1));
-  order.seasonings.forEach((id, i) =>
-    stack('seasonings', renderLayer(ctxFor(`season:${id}`, i), ing(id)), 1),
-  );
+  for (const [i, id] of veggieOrder(order.veggies).entries()) {
+    stack('veggies', renderLayer(ctxFor(`veg:${id}`, i), ing(id)), 0.8);
+  }
+  for (const [i, id] of order.sauces.entries())
+    stack('sauces', renderLayer(ctxFor(`sauce:${id}`, i), ing(id)), 1);
+  for (const [i, id] of order.seasonings.entries()) {
+    stack('seasonings', renderLayer(ctxFor(`season:${id}`, i), ing(id)), 1);
+  }
   for (const id of order.extras) {
     const item = ing(id);
     if (item.art.kind === 'none') continue;
@@ -290,11 +291,16 @@ export function buildSandwich(order: Order, opts: BuildOpts): SandwichArt {
     for (const t of toastTargets) parts[t].setAttribute('filter', paint.fx('toast') as string);
 
   const root = el('g', { class: 'sandwich-root' }, ...PARTS.map((p) => parts[p]));
-  const vbY = Math.min(GROUND - 250, top - 30);
-  const viewBox = { x: 0, y: vbY, w: VIEW_W, h: GROUND + 44 - vbY };
+  // Frame tightly around the sandwich (6-inch gets zoomed less than 1:1 with a floor width).
+  const vbW = Math.max(640, span + 110);
+  const vbY = top - 34;
+  const viewBox = { x: cx - vbW / 2, y: vbY, w: vbW, h: GROUND + 30 - vbY };
   const svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('viewBox', `${viewBox.x} ${viewBox.y.toFixed(1)} ${viewBox.w} ${viewBox.h.toFixed(1)}`);
-  svg.setAttribute('preserveAspectRatio', 'xMidYMax meet');
+  svg.setAttribute(
+    'viewBox',
+    `${viewBox.x.toFixed(1)} ${viewBox.y.toFixed(1)} ${viewBox.w.toFixed(1)} ${viewBox.h.toFixed(1)}`,
+  );
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
   svg.setAttribute('role', 'img');
   svg.append(paint.defs, root);
 

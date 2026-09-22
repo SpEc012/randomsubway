@@ -41,10 +41,40 @@ function foldItems(
         d: blob(rng, cx, cy, rx, ry, 0.14, 12, rot),
         fill: p.linear([c0, c1, c2]),
         stroke: c3,
-        'stroke-width': 1.1,
-        'stroke-opacity': 0.45,
+        'stroke-width': 1.3,
+        'stroke-opacity': 0.75,
       }),
     );
+    // Stacked slice edges peeking along the bottom of each fold.
+    for (let k = 1; k <= 2; k++) {
+      const yy = cy + ry * (0.25 + k * 0.22);
+      const edge = smoothPath([
+        [cx - rx * (0.85 - k * 0.1), yy - 2],
+        [cx, yy + (rng.next() - 0.3) * 2.5],
+        [cx + rx * (0.85 - k * 0.1), yy - 1.5],
+      ]);
+      g.appendChild(
+        el('path', {
+          d: edge,
+          fill: 'none',
+          stroke: shade(c3, -0.1),
+          'stroke-width': 1.1,
+          opacity: 0.55,
+          'stroke-linecap': 'round',
+        }),
+      );
+      g.appendChild(
+        el('path', {
+          d: edge,
+          fill: 'none',
+          stroke: c0,
+          'stroke-width': 0.9,
+          opacity: 0.7,
+          'stroke-linecap': 'round',
+          transform: 'translate(0 -1.2)',
+        }),
+      );
+    }
     const crease = smoothPath([
       [cx - rx * 0.75, cy - ry * 0.1],
       [cx - rx * 0.1, cy - ry * 0.45 + (rng.next() - 0.5) * 3],
@@ -169,7 +199,8 @@ export function fold(ctx: LayerCtx, spec: Spec<'fold'>): LayerOut {
   const inner = el('g', {});
   foldItems(ctx, inner, spec.palette, spec.marble, t);
   if (ctx.double) foldItems(ctx, inner, spec.palette, spec.marble, t, 0.8, -12);
-  return { g: layerGroup(ctx, inner, ctx.p.fx('lumpy')), height: t };
+  // Satin sheen, not lumpy — lumpy made folded turkey read as tuna.
+  return { g: layerGroup(ctx, inner, ctx.p.fx('sheen')), height: t };
 }
 
 export function rounds(ctx: LayerCtx, spec: Spec<'rounds'>): LayerOut {
@@ -198,10 +229,10 @@ export function deliMix(ctx: LayerCtx, spec: Spec<'deliMix'>): LayerOut {
 /** Chicken, steak, teriyaki: an irregular pile of pieces, back-to-front. */
 export function chunks(ctx: LayerCtx, spec: Spec<'chunks'>): LayerOut {
   const { rng, p } = ctx;
-  const t = ctx.double ? 36 : 24;
+  const t = ctx.double ? 40 : 28;
   const span = ctx.x1 - ctx.x0;
   const [c0, c1, c2, c3] = spec.palette as [string, string, string, string];
-  const per = spec.shred ? 5 : spec.grill ? 11 : 8;
+  const per = spec.shred ? 3.6 : spec.grill ? 7.5 : 5.5;
   const count = Math.round((span / per) * (ctx.double ? 1.5 : 1));
   const pieces: { x: number; y: number }[] = [];
   for (let i = 0; i < count; i++) {
@@ -383,16 +414,16 @@ export function bacon(ctx: LayerCtx, spec: Spec<'bacon'>): LayerOut {
   const [meat, dark, fat, fat2] = spec.palette as [string, string, string, string];
   const span = ctx.x1 - ctx.x0;
   const inner = el('g', {});
-  const strips = Math.max(2, Math.round(span / 170)) * (ctx.double ? 2 : 1);
+  const strips = Math.max(3, Math.round(span / 110)) * (ctx.double ? 2 : 1);
   for (let i = 0; i < strips; i++) {
     const len = 150 + rng.next() * 90;
     const xs = ctx.x0 + rng.next() * Math.max(1, span - len);
     const xe = Math.min(ctx.x1, xs + len);
-    const base = ctx.y - 6 - rng.next() * 8;
+    const base = ctx.y - 7 - rng.next() * 7;
     const amp = 3 + rng.next() * 3;
     const lambda = 34 + rng.next() * 16;
     const ph = rng.next() * 6;
-    const w = 9 + rng.next() * 2;
+    const w = 11 + rng.next() * 2.5;
     const c = (x: number) => base + Math.sin((x / lambda) * Math.PI * 2 + ph) * amp;
     inner.appendChild(
       el('path', {
@@ -436,12 +467,12 @@ export function bacon(ctx: LayerCtx, spec: Spec<'bacon'>): LayerOut {
       }),
     );
   }
-  return { g: layerGroup(ctx, inner, p.fx('sheen')), height: ctx.double ? 18 : 12 };
+  return { g: layerGroup(ctx, inner, p.fx('sheen')), height: ctx.double ? 24 : 16 };
 }
 
 export function omelet(ctx: LayerCtx, spec: Spec<'omelet'>): LayerOut {
   const { rng, p } = ctx;
-  const t = ctx.double ? 26 : 16;
+  const t = ctx.double ? 32 : 21;
   const [c0, c1, c2, c3] = spec.palette as [string, string, string, string];
   const n = noise1d(rng, 0.03, 2);
   const inner = el('g', {});
@@ -494,7 +525,7 @@ export function omelet(ctx: LayerCtx, spec: Spec<'omelet'>): LayerOut {
 
 export function patty(ctx: LayerCtx, spec: Spec<'patty'>): LayerOut {
   const { rng, p } = ctx;
-  const t = 20;
+  const t = 24;
   const span = ctx.x1 - ctx.x0;
   const count = Math.max(1, Math.round(span / 190));
   const w = span / count;

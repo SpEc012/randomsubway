@@ -103,7 +103,7 @@ export const INGREDIENTS = [
     price: 0,
     tags: ['poultry'],
     weight: 1,
-    art: { kind: 'fold', palette: ['#F6E3D0', '#EACBAF', '#D7AE8C', '#B88D6A'] },
+    art: { kind: 'fold', palette: ['#F8E6D6', '#EFCFB8', '#DDB091', '#B07F63'] },
   },
   {
     id: 'ham',

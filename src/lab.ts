@@ -60,3 +60,26 @@ if (set === 'breads') {
     root.append(fig);
   }
 }
+// set=proteins: every protein on the same bread.
+if (set === 'proteins') {
+  const { byCategory } = await import('./data/ingredients');
+  for (const pr of byCategory.protein) {
+    const order: Order = {
+      bread: 'italian',
+      size: '6in',
+      toasted: false,
+      protein: pr.id,
+      cheese: 'no-cheese',
+      veggies: ['lettuce'],
+      sauces: [],
+      seasonings: [],
+      extras: [],
+    };
+    const art = buildSandwich(order, { seed: pr.id, finished });
+    const fig = document.createElement('figure');
+    const cap = document.createElement('figcaption');
+    cap.textContent = pr.name;
+    fig.append(art.svg, cap);
+    root.append(fig);
+  }
+}

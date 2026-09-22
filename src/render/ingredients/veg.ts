@@ -23,15 +23,15 @@ export function lettuce(ctx: LayerCtx, spec: Spec<'lettuce'>): LayerOut {
     const drape = noise1d(rng, 0.05, 2);
     const ph = rng.next() * 6;
     const top = (x: number) => ctx.y - t * L.top + n1(x) * 5 + Math.sin(x * 0.42 + ph) * 2.2 * (1 + n2(x));
-    const bot = (x: number) => ctx.y + 1 + Math.max(0, drape(x)) * 11;
+    const bot = (x: number) => ctx.y - 2 + Math.max(0, drape(x)) * 5;
     bands.appendChild(el('path', { d: band(ctx.x0 - 4, ctx.x1 + 4, top, bot, 90), fill: L.fill }));
   }
   const shreds = el('g', { 'stroke-linecap': 'round', fill: 'none' });
   const span = ctx.x1 - ctx.x0;
   for (let i = 0; i < span / 7; i++) {
-    const hang = rng.chance(0.3);
+    const hang = rng.chance(0.12);
     const x = ctx.x0 + rng.next() * span;
-    const y = hang ? ctx.y + rng.next() * 6 : ctx.y - rng.next() * t * 1.1;
+    const y = hang ? ctx.y + rng.next() * 3 : ctx.y - 3 - rng.next() * t * 1.05;
     const a = hang
       ? Math.PI / 2 + (rng.next() - 0.5) * 1.2
       : (rng.next() - 0.5) * 1.6 + (rng.chance(0.5) ? Math.PI : 0);

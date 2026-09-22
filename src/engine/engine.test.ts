@@ -257,3 +257,26 @@ describe('order text + share codec', () => {
     expect(decodeShare('1.ABC.0.0.0.zz.0.0.0.0.0.0.0..')).toBeNull();
   });
 });
+
+describe('orderRank', () => {
+  it('is unique and within [0, total) across many rolls', async () => {
+    const { orderRank } = await import('./combinatorics');
+    const total = countForFilters([]);
+    const seen = new Map<bigint, string>();
+    for (let i = 0; i < 3000; i++) {
+      const { order } = roll({
+        seed: `RK${i}`,
+        mode: (['custom', 'nightmare', 'signature'] as const)[i % 3] as 'custom',
+        chaos: i % 101,
+        filters: [],
+        locks: [],
+      });
+      const r = orderRank(order);
+      expect(r >= 0n && r < total).toBe(true);
+      const k = orderKey(order);
+      const prev = seen.get(r);
+      if (prev !== undefined) expect(prev).toBe(k);
+      seen.set(r, k);
+    }
+  });
+});
