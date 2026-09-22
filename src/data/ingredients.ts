@@ -180,7 +180,7 @@ export const INGREDIENTS = [
     price: 0.5,
     tags: ['beef', 'pork', 'gluten', 'dairy'],
     weight: 0.65,
-    art: { kind: 'meatballs', palette: ['#A8683F', '#83482A', '#5E2F19', '#3B1B0D'], sauce: '#B8261A' },
+    art: { kind: 'meatballs', palette: ['#BF8154', '#9A5F3B', '#723F22', '#4A2614'], sauce: '#B8261A' },
   },
   {
     id: 'tuna',
@@ -426,7 +426,7 @@ export const INGREDIENTS = [
     price: 0,
     tags: [],
     weight: 0.95,
-    art: { kind: 'disc', rim: '#C8211B', flesh: '#E8402E', core: '#F7A36B', pattern: 'tomato', size: 30 },
+    art: { kind: 'disc', rim: '#B81E16', flesh: '#E0412C', core: '#F59A68', pattern: 'tomato', size: 28 },
   },
   {
     id: 'cucumber',
